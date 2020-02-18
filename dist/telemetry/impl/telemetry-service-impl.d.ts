@@ -1,5 +1,5 @@
 import { DbService } from '../../db';
-import { Context, TelemetryAuditRequest, TelemetryDecorator, TelemetryEndRequest, TelemetryErrorRequest, TelemetryExportRequest, TelemetryExportResponse, TelemetryFeedbackRequest, TelemetryImportRequest, TelemetryImpressionRequest, TelemetryInteractRequest, TelemetryInterruptRequest, TelemetryLogRequest, TelemetryService, TelemetryShareRequest, TelemetryStartRequest, TelemetryStat, TelemetrySyncRequest, TelemetrySyncStat } from '..';
+import { Context, TelemetryAuditRequest, TelemetryDecorator, TelemetryEndRequest, TelemetryErrorRequest, TelemetryFeedbackRequest, TelemetryImportRequest, TelemetryImpressionRequest, TelemetryInteractRequest, TelemetryInterruptRequest, TelemetryLogRequest, TelemetryService, TelemetryShareRequest, TelemetryStartRequest, TelemetryStat, TelemetrySyncRequest, TelemetrySyncStat } from '..';
 import { ProfileService } from '../../profile';
 import { GroupService } from '../../group';
 import { KeyValueStore } from '../../key-value-store';
@@ -53,7 +53,6 @@ export declare class TelemetryServiceImpl implements TelemetryService {
     start({ type, deviceSpecification, loc, mode, duration, pageId, env, objId, objType, objVer, rollup, correlationData }: TelemetryStartRequest): Observable<boolean>;
     interrupt({ type, pageId }: TelemetryInterruptRequest): Observable<boolean>;
     importTelemetry(importTelemetryRequest: TelemetryImportRequest): Observable<boolean>;
-    exportTelemetry(telemetryExportRequest: TelemetryExportRequest): Observable<TelemetryExportResponse>;
     getTelemetryStat(): Observable<TelemetryStat>;
     resetDeviceRegisterTTL(): Observable<undefined>;
     sync(telemetrySyncRequest?: TelemetrySyncRequest): Observable<TelemetrySyncStat>;

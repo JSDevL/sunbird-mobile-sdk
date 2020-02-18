@@ -337,9 +337,11 @@ export class SunbirdSdk {
             new SessionAuthenticator(this.sharedPreferences, this.sdkConfig.apiConfig, this.apiService, this.authService)
         ]);
 
-        await this.dbService.init();
-        await this.appInfo.init();
-        await this.preInit().toPromise();
+        if (window.device.platform !== 'iPhone') {
+            await this.dbService.init();
+        }
+        // await this.appInfo.init();
+        // await this.preInit().toPromise();
 
         this._isInitialised = true;
 
@@ -391,13 +393,13 @@ export class SunbirdSdk {
     private postInit() {
         return combineLatest([
             this.apiService.onInit(),
-            this.summarizerService.onInit(),
-            this.errorLoggerService.onInit(),
+            // this.summarizerService.onInit(),
+            // this.errorLoggerService.onInit(),
             this.eventsBusService.onInit(),
-            this.downloadService.onInit(),
-            this.contentService.onInit(),
-            this.storageService.onInit(),
-            this.telemetryService.onInit()
+            // this.downloadService.onInit(),
+            ...( window.device.platform !== 'iPhone' ? [this.contentService.onInit()] : [] )
+            // this.storageService.onInit(),
+            // this.telemetryService.onInit()
         ]);
     }
 }
