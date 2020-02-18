@@ -337,7 +337,7 @@ export class SunbirdSdk {
             new SessionAuthenticator(this.sharedPreferences, this.sdkConfig.apiConfig, this.apiService, this.authService)
         ]);
 
-        if (window.device.platform !== 'iPhone') {
+        if (window.device.platform !== 'iOS') {
             await this.dbService.init();
         }
         // await this.appInfo.init();
