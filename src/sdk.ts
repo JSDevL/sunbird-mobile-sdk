@@ -71,6 +71,8 @@ import {combineLatest} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
 import {ArchiveService} from './archive';
 import {ArchiveServiceImpl} from './archive/impl/archive-service-impl';
+import PouchDB from 'pouchdb';
+import * as pouchdbCordovaPlugin from 'pouchdb-adapter-cordova-sqlite';
 
 export class SunbirdSdk {
     private _container: Container;
@@ -89,6 +91,10 @@ export class SunbirdSdk {
 
     get isInitialised(): boolean {
         return this._isInitialised;
+    }
+
+    get pouchDBInstance(): PouchDB.Database {
+        return this._container.get<PouchDB.Database>(InjectionTokens.POUCH_DB_INSTANCE);
     }
 
     get sdkConfig(): SdkConfig {
@@ -221,6 +227,11 @@ export class SunbirdSdk {
 
     public async init(sdkConfig: SdkConfig) {
         this._container = new Container();
+
+        PouchDB.plugin(pouchdbCordovaPlugin);
+        const db = new PouchDB('mydb.db', {adapter: 'cordova-sqlite'});
+
+        this._container.bind<PouchDB.Database>(InjectionTokens.CONTAINER).toConstantValue(db);
 
         this._container.bind<Container>(InjectionTokens.CONTAINER).toConstantValue(this._container);
 
