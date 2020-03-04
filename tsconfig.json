@@ -22,7 +22,9 @@
     "types": [
       "node-fetch",
       "reflect-metadata",
-      "websql"
+      "websql",
+      "pouchdb",
+      "pouchdb-adapter-cordova-sqlite"
     ],
     "moduleResolution": "node"
   },
