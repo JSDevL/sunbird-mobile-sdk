@@ -66,7 +66,8 @@ export class PageAssemblerHandler implements ApiRequestHandler<PageAssembleCrite
                         request.sections = {
                             [sectionId]: {
                                 filters: {
-                                    'batches.createdFor': [activeChannelId]
+                                    'batches.createdFor': [activeChannelId],
+                                    ...request.filters
                                 }
                             }
                         };
