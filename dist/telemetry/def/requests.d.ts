@@ -8,6 +8,7 @@ export interface TelemetryAuditRequest {
     objId?: string;
     objType?: string;
     objVer?: string;
+    correlationData?: Array<CorrelationData>;
 }
 export declare class TelemetryInteractRequest {
     type: InteractType;
@@ -80,11 +81,13 @@ export declare class TelemetryEndRequest {
 }
 export declare class TelemetryFeedbackRequest {
     env: string;
-    rating: number;
+    rating?: number;
     comments: string;
     objId: string;
     objType: string;
     objVer: string;
+    commentid?: string;
+    commenttxt?: string;
 }
 export declare class TelemetryLogRequest {
     type: LogType;
@@ -102,22 +105,19 @@ export declare class TelemetryShareRequest {
     type: string;
     items: Array<Item>;
     env: string;
+    correlationData?: Array<CorrelationData>;
+    objId?: string;
+    objType?: string;
+    objVer?: string;
+    rollUp?: Rollup;
 }
 export interface Item {
-    type: ShareItemType;
+    type: ShareItemType | string;
     origin: string;
     identifier: string;
     pkgVersion: number;
     transferCount: number;
     size: string;
-}
-export interface ExportTelemetryContext {
-    destinationFolder: string;
-    destinationDBFilePath?: string;
-    metadata?: {
-        [index: string]: any;
-    };
-    size?: string;
 }
 export interface ImportTelemetryContext {
     sourceDBFilePath: string;
@@ -125,9 +125,10 @@ export interface ImportTelemetryContext {
         [index: string]: any;
     };
 }
-export interface TelemetryExportRequest {
-    destinationFolder: string;
-}
 export interface TelemetryImportRequest {
     sourceFilePath: string;
+}
+export interface TelemetrySyncRequest {
+    ignoreSyncThreshold?: boolean;
+    ignoreAutoSyncMode?: boolean;
 }

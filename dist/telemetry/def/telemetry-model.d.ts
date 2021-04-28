@@ -17,6 +17,7 @@ export declare class ReportSummary {
     hierarchyData: string;
     totalMaxScore: number;
     totalScore: number;
+    totalQuestionsScore: number;
 }
 export declare class Context {
     env: string;
@@ -25,6 +26,7 @@ export declare class Context {
     pdata: ProducerData;
     sid: string;
     did: string;
+    rollup: Rollup;
 }
 export declare class DeviceSpecification {
     os: string;
@@ -156,16 +158,16 @@ export declare namespace SunbirdTelemetry {
         private static readonly EID;
         constructor(dir: string | undefined, type: string | undefined, items: Array<{
             [index: string]: any;
-        }> | undefined);
-        addItem(type: ShareItemType, origin: string, identifier: string, pkgVersion: number, transferCount: number, size: string): void;
+        }> | undefined, correlationData?: Array<CorrelationData>, objId?: string, objType?: string, objVer?: string, rollUp?: Rollup);
+        addItem(type: ShareItemType | string, origin: string, identifier: string, pkgVersion: number, transferCount: number, size: string): void;
         capitalize(input: any): string;
     }
     class Feedback extends Telemetry {
         private static readonly EID;
-        constructor(rating: number | undefined, comments: string | undefined, env: string, objId?: string, objType?: string, objVer?: string);
+        constructor(rating: number | undefined, comments: string | undefined, env: string, objId: string | undefined, objType: string | undefined, objVer: string | undefined, commentid: string | undefined, commenttxt: string | undefined);
     }
     class Audit extends Telemetry {
         private static readonly EID;
-        constructor(env: string, actor: Actor, currentState: AuditState, updatedProperties: string[] | undefined, objId?: string, objType?: string, objVer?: string);
+        constructor(env: string, actor: Actor, currentState: AuditState, updatedProperties: string[] | undefined, objId?: string, objType?: string, objVer?: string, correlationData?: Array<CorrelationData>);
     }
 }

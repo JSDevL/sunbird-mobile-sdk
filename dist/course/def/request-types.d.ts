@@ -5,7 +5,6 @@ export interface FetchEnrolledCourseRequest {
 export interface EnrollCourseRequest {
     userId: string;
     courseId: string;
-    contentId: string;
     batchId: string;
     batchStatus?: number;
 }
@@ -22,6 +21,7 @@ export interface UpdateContentStateRequest {
 }
 export interface CourseBatchesRequest {
     filters: CourseBatchesRequestFilters;
+    fields: string[];
 }
 export interface UpdateContentStateAPIRequest {
     userId: string;
@@ -76,4 +76,10 @@ export interface ContentState {
 }
 export interface ContentStateResponse {
     contentList: ContentState[];
+}
+export interface GenerateAttemptIdRequest {
+    courseId: string;
+    batchId: string;
+    contentId: string;
+    userId: string;
 }
